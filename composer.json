@@ -1,0 +1,32 @@
+{
+    "name": "mageami/magento2-pokemon-client",
+    "description": "The module is a client that provides a connection to the Pokemon Rest API",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "proprietary"
+    ],
+    "authors": [
+        {
+            "name": "Andrzej Chmiel",
+            "email": "andrzej.chmiel.amicode@gmail.com"
+        }
+    ],
+    "require": {
+        "magento/magento-composer-installer": "*",
+        "magento/framework": "*",
+        "magento/module-backend": "*",
+        "magento/module-catalog": "*",
+        "php": ">=8.1.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Pokemon\\Client\\": ""
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

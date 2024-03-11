@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Pokemon\Client\Api\Data\RequestInterface" type="Pokemon\Client\Model\Request"/>
+    <preference for="Pokemon\Client\Api\Data\ResponseInterface" type="Pokemon\Client\Model\Response"/>
+    <preference for="Pokemon\Client\Api\RequestBuilderInterface" type="Pokemon\Client\Model\RequestBuilder"/>
+    <preference for="Pokemon\Client\Api\ClientInterface" type="Pokemon\Client\Service\LoggerClient"/>
+
+    <type name="Pokemon\Client\Service\LoggerClient">
+        <arguments>
+            <argument name="logger" xsi:type="object">Virtual\Pokemon\Logger\Logger</argument>
+            <argument name="apiClient" xsi:type="object">Pokemon\Client\Service\Client</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Virtual\Pokemon\Logger\Logger\Handler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/pokemon/api.log</argument>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Virtual\Pokemon\Logger\Logger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="name" xsi:type="string">Pokemon API Logger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">Virtual\Pokemon\Logger\Logger\Handler</item>
+                <item name="system" xsi:type="object">Virtual\Pokemon\Logger\Logger\Handler</item>
+                <item name="syslog" xsi:type="object">Virtual\Pokemon\Logger\Logger\Handler</item>
+                <item name="report" xsi:type="object">Virtual\Pokemon\Logger\Logger\Handler</item>
+                <item name="error" xsi:type="object">Virtual\Pokemon\Logger\Logger\Handler</item>
+                <item name="info" xsi:type="object">Virtual\Pokemon\Logger\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+</config>
