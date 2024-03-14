@@ -33,7 +33,6 @@ class Client implements \Pokemon\Client\Api\ClientInterface
         $callable = $this->getHttpCallClosure($apiClientRequest);
         try {
             $callable();
-            $this->client->get($apiClientRequest->getUrl());
             $body = $this->client->getBody();
             $statusCode = $this->client->getStatus();
         } catch (\Exception $e) {
